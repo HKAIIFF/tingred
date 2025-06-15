@@ -1,0 +1,2112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>听运 Ting.Red - 智能音律调运系统 | 让音律成为你的幸运密码</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #c41e3a;
+            --secondary: #8b0000;
+            --accent: #ff6b6b;
+            --gold: #ffd700;
+            --wisdom: #4a5568;
+            --modern: #667eea;
+        }
+        
+        body {
+            font-family: 'Inter', 'Noto Sans SC', sans-serif;
+            background-color: #0f0f0f;
+            color: #ffffff;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(196, 30, 58, 0.1) 0%, transparent 30%),
+                radial-gradient(circle at 80% 70%, rgba(139, 0, 0, 0.1) 0%, transparent 30%),
+                radial-gradient(circle at 40% 80%, rgba(255, 107, 107, 0.05) 0%, transparent 20%);
+        }
+        
+        .logo-font {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-weight: 700;
+            letter-spacing: 3px;
+            background: linear-gradient(135deg, var(--primary), var(--accent), var(--gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            display: inline-block;
+            text-shadow: 0 0 20px rgba(196, 30, 58, 0.4);
+            animation: logoGlow 4s ease-in-out infinite alternate;
+        }
+        
+        @keyframes logoGlow {
+            0% { text-shadow: 0 0 15px rgba(196, 30, 58, 0.4); }
+            100% { text-shadow: 0 0 30px rgba(196, 30, 58, 0.8), 0 0 40px rgba(255, 107, 107, 0.5); }
+        }
+        
+        .traditional-text {
+            font-family: 'Ma Shan Zheng', cursive;
+            color: var(--gold);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--accent), var(--gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .card {
+            background: rgba(26, 32, 44, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            transition: all 0.4s ease;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(196, 30, 58, 0.3);
+            border-color: rgba(196, 30, 58, 0.5);
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(196, 30, 58, 0.1), transparent);
+            transition: left 0.6s;
+        }
+        
+        .card:hover::before {
+            left: 100%;
+        }
+        
+        .navbar {
+            background: rgba(15, 15, 15, 0.95);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(196, 30, 58, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            background: rgba(0, 0, 0, 0.98);
+            box-shadow: 0 8px 32px rgba(196, 30, 58, 0.2);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            transition: all 0.3s ease;
+            border: none;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(196, 30, 58, 0.5);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--gold), #ffed4e);
+            color: #000;
+            transition: all 0.3s ease;
+            border: none;
+            font-weight: 600;
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.5);
+        }
+        
+        .hero {
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+        
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(196, 30, 58, 0.1) 50%, rgba(0,0,0,0.7) 100%);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.6;
+            animation: bgFloat 20s infinite linear;
+        }
+        
+        @keyframes bgFloat {
+            0% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.05) rotate(1deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+        
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .pulse {
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(196, 30, 58, 0.4); }
+            70% { box-shadow: 0 0 0 20px rgba(196, 30, 58, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(196, 30, 58, 0); }
+        }
+        
+        .sound-wave {
+            position: absolute;
+            width: 4px;
+            background: linear-gradient(to top, transparent, var(--accent), var(--primary), transparent);
+            border-radius: 2px;
+            animation: soundWave 2s ease-in-out infinite;
+        }
+        
+        @keyframes soundWave {
+            0%, 100% { height: 20px; opacity: 0.3; }
+            50% { height: 60px; opacity: 1; }
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+            box-shadow: 0 10px 30px rgba(196, 30, 58, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-icon:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .timeline {
+            position: relative;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--accent), var(--gold));
+            border-radius: 2px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin: 3rem 0;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 4px solid #0f0f0f;
+            z-index: 2;
+            box-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
+        }
+        
+        .timeline-content {
+            width: 45%;
+            padding: 2rem;
+            background: rgba(26, 32, 44, 0.8);
+            border-radius: 20px;
+            border: 1px solid rgba(196, 30, 58, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .timeline-left {
+            margin-left: 0;
+        }
+        
+        .timeline-right {
+            margin-left: 55%;
+        }
+        
+        .pricing-card {
+            position: relative;
+            background: rgba(26, 32, 44, 0.9);
+            border-radius: 25px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-15px);
+            border-color: var(--accent);
+            box-shadow: 0 25px 50px rgba(196, 30, 58, 0.4);
+        }
+        
+        .pricing-featured {
+            border-color: var(--gold);
+            position: relative;
+        }
+        
+        .pricing-featured::before {
+            content: '最受欢迎';
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--gold);
+            color: #000;
+            padding: 0.5rem 1.5rem;
+            border-bottom-left-radius: 15px;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        
+        .stats-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .mobile-menu {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            background: rgba(15, 15, 15, 0.98);
+            z-index: 999;
+            padding: 2rem;
+            transform: translateY(-150%);
+            transition: transform 0.4s ease;
+            backdrop-filter: blur(15px);
+        }
+        
+        .mobile-menu.active {
+            transform: translateY(0);
+        }
+        
+        .mobile-menu a {
+            display: block;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+        
+        .mobile-menu a:hover {
+            color: var(--accent);
+        }
+        
+        .partner-logo {
+            height: 60px;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+            filter: grayscale(100%);
+        }
+        
+        .partner-logo:hover {
+            opacity: 1;
+            filter: grayscale(0%);
+            transform: scale(1.1);
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 80vh;
+                padding-top: 100px;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem !important;
+            }
+            
+            .timeline-item::before {
+                left: 30px;
+            }
+            
+            .timeline::before {
+                left: 30px;
+            }
+            
+            .timeline-content {
+                width: calc(100% - 80px);
+                margin-left: 80px;
+            }
+            
+            .timeline-right {
+                margin-left: 80px;
+            }
+            
+            .stats-number {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sound Wave Effects -->
+    <div class="sound-wave" style="left: 5%; animation-delay: 0s; height: 30px;"></div>
+    <div class="sound-wave" style="left: 15%; animation-delay: 0.3s; height: 45px;"></div>
+    <div class="sound-wave" style="left: 25%; animation-delay: 0.6s; height: 25px;"></div>
+    <div class="sound-wave" style="right: 25%; animation-delay: 0.9s; height: 35px;"></div>
+    <div class="sound-wave" style="right: 15%; animation-delay: 1.2s; height: 50px;"></div>
+    <div class="sound-wave" style="right: 5%; animation-delay: 1.5s; height: 28px;"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar fixed w-full z-50 px-4 py-4" id="navbar">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-3">
+                <div class="logo-font text-3xl md:text-4xl">听运 Ting.Red</div>
+                <div class="traditional-text text-sm hidden md:block">智能音律调运系统</div>
+            </a>
+            
+            <!-- Desktop Navigation -->
+            <div class="hidden lg:flex space-x-8 items-center">
+                <a href="#features" class="hover:text-red-400 transition text-lg">核心功能</a>
+                <a href="#technology" class="hover:text-red-400 transition text-lg">技术原理</a>
+                <a href="#scenarios" class="hover:text-red-400 transition text-lg">应用场景</a>
+                <a href="#pricing" class="hover:text-red-400 transition text-lg">服务套餐</a>
+                <a href="#partners" class="hover:text-red-400 transition text-lg">合作伙伴</a>
+                <a href="#about" class="hover:text-red-400 transition text-lg">关于我们</a>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <a href="#download" class="btn-primary px-6 py-3 rounded-full text-sm font-bold hidden md:block">
+                    <i class="fas fa-download mr-2"></i>立即体验
+                </a>
+                <a href="#contact" class="btn-secondary px-6 py-3 rounded-full text-sm font-bold">
+                    合作咨询
+                </a>
+                
+                <!-- Mobile Menu Button -->
+                <button class="lg:hidden text-white text-2xl" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu lg:hidden" id="mobileMenu">
+            <a href="#features">核心功能</a>
+            <a href="#technology">技术原理</a>
+            <a href="#scenarios">应用场景</a>
+            <a href="#pricing">服务套餐</a>
+            <a href="#partners">合作伙伴</a>
+            <a href="#about">关于我们</a>
+            <div class="mt-4 pt-4 border-t border-gray-700">
+                <a href="#download" class="btn-primary px-6 py-3 rounded-full text-sm font-bold mr-4">立即体验</a>
+                <a href="#contact" class="btn-secondary px-6 py-3 rounded-full text-sm font-bold">合作咨询</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')"></div>
+        
+        <div class="container mx-auto px-4 hero-content">
+            <div class="max-w-6xl mx-auto text-center">
+                <div class="mb-12">
+                    <h1 class="text-5xl md:text-8xl font-bold mb-6 gradient-text">
+                        让音律成为你的幸运密码
+                    </h1>
+                    <p class="text-xl md:text-3xl text-gray-300 mb-4 traditional-text">
+                        五千年音律养生智慧 × 前沿AI音频生成技术
+                    </p>
+                    <p class="text-lg md:text-xl text-gray-400 max-w-4xl mx-auto">
+                        通过AI深度分析您的多维数据，融合八字五行、紫微斗数等传统理论，生成专属音频实现事业、财运、情感、健康的全方位能量场调节
+                    </p>
+                </div>
+                
+                <!-- Product Features Highlight -->
+                <div class="grid md:grid-cols-4 gap-6 mb-12">
+                    <div class="bg-black bg-opacity-50 rounded-xl p-6 pulse">
+                        <div class="text-3xl font-bold text-red-400 mb-2">千人千音</div>
+                        <div class="text-sm text-gray-400">个性化定制</div>
+                    </div>
+                    <div class="bg-black bg-opacity-50 rounded-xl p-6">
+                        <div class="text-3xl font-bold text-gold mb-2">古今融合</div>
+                        <div class="text-sm text-gray-400">传统与现代</div>
+                    </div>
+                    <div class="bg-black bg-opacity-50 rounded-xl p-6">
+                        <div class="text-3xl font-bold text-blue-400 mb-2">全场景</div>
+                        <div class="text-sm text-gray-400">生活应用</div>
+                    </div>
+                    <div class="bg-black bg-opacity-50 rounded-xl p-6">
+                        <div class="text-3xl font-bold text-purple-400 mb-2">AI驱动</div>
+                        <div class="text-sm text-gray-400">智能分析</div>
+                    </div>
+                </div>
+
+                <!-- Call to Action -->
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 justify-center mb-12">
+                    <a href="#download" class="btn-primary px-10 py-4 rounded-full text-xl font-bold">
+                        <i class="fas fa-play mr-3"></i>免费体验7天
+                    </a>
+                    <a href="#demo" class="btn-secondary px-10 py-4 rounded-full text-xl font-bold">
+                        <i class="fas fa-music mr-3"></i>试听样例
+                    </a>
+                </div>
+
+                <!-- Trust Indicators -->
+                <div class="text-gray-400 text-sm">
+                    <p class="mb-2">已为<span class="text-red-400 font-bold">10万+</span>用户提供专属音律调运服务</p>
+                    <p>获得<span class="text-gold font-bold">98.5%</span>用户满意度评价</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Features Section -->
+    <section id="features" class="py-20 bg-black bg-opacity-30">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-6xl font-bold mb-6 gradient-text">核心功能体系</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    基于中华传统音律理论与现代AI技术的深度融合，为您提供科学化的个性音律调运解决方案
+                </p>
+            </div>
+
+            <!-- Main Features Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                <!-- Intelligent Analysis -->
+                <div class="card p-8 text-center">
+                    <div class="feature-icon floating">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">智能多维分析</h3>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        AI助手"小振"温馨对话收集您的基础信息、生活环境、个人特质等数据，结合八字五行、紫微斗数、奇门遁甲等传统算法，融合生物节律、地磁场影响等现代科学计算，构建全方位个人运势画像。
+                    </p>
+                    <div class="flex flex-wrap gap-2 justify-center">
+                        <span class="bg-red-500 bg-opacity-20 text-red-400 text-xs px-3 py-1 rounded-full">八字分析</span>
+                        <span class="bg-purple-500 bg-opacity-20 text-purple-400 text-xs px-3 py-1 rounded-full">紫微斗数</span>
+                        <span class="bg-blue-500 bg-opacity-20 text-blue-400 text-xs px-3 py-1 rounded-full">生物节律</span>
+                    </div>
+                </div>
+
+                <!-- AI Audio Generation -->
+                <div class="card p-8 text-center">
+                    <div class="feature-icon floating" style="animation-delay: 0.2s;">
+                        <i class="fas fa-waveform-lines"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">AI音频生成引擎</h3>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        根据五行属性确定基础调式（宫商角徵羽），结合八字喜用神调整音高音色，基于紫微命盘设计音乐结构节奏。深度学习音乐创作模型生成原创旋律，多层次和声编排，动态音效处理，创造独一无二的专属音频。
+                    </p>
+                    <div class="flex flex-wrap gap-2 justify-center">
+                        <span class="bg-green-500 bg-opacity-20 text-green-400 text-xs px-3 py-1 rounded-full">五音疗法</span>
+                        <span class="bg-yellow-500 bg-opacity-20 text-yellow-400 text-xs px-3 py-1 rounded-full">AI作曲</span>
+                        <span class="bg-indigo-500 bg-opacity-20 text-indigo-400 text-xs px-3 py-1 rounded-full">动态调制</span>
+                    </div>
+                </div>
+
+                <!-- Full Scene Application -->
+                <div class="card p-8 text-center">
+                    <div class="feature-icon floating" style="animation-delay: 0.4s;">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">全场景应用覆盖</h3>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        从晨起激活到晚间助眠，从工作专注到重要会议，从相亲约会到投资决策。涵盖事业运势、财富优化、情感关系、健康调节四大核心方向，提供晨起激活、工作专注、午休恢复、晚间放松等时间场景定制服务。
+                    </p>
+                    <div class="flex flex-wrap gap-2 justify-center">
+                        <span class="bg-orange-500 bg-opacity-20 text-orange-400 text-xs px-3 py-1 rounded-full">事业运势</span>
+                        <span class="bg-emerald-500 bg-opacity-20 text-emerald-400 text-xs px-3 py-1 rounded-full">财富优化</span>
+                        <span class="bg-pink-500 bg-opacity-20 text-pink-400 text-xs px-3 py-1 rounded-full">情感关系</span>
+                    </div>
+                </div>
+
+                <!-- Effect Evaluation -->
+                <div class="card p-8 text-center">
+                    <div class="feature-icon floating" style="animation-delay: 0.6s;">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">效果评估优化</h3>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        实时收集使用效果数据，通过用户反馈系统持续优化音频生成算法。机器学习引擎基于大数据分析识别使用模式，个性化推荐最适合的音频内容，确保调运效果随时间推移不断提升，越用越精准。
+                    </p>
+                    <div class="flex flex-wrap gap-2 justify-center">
+                        <span class="bg-cyan-500 bg-opacity-20 text-cyan-400 text-xs px-3 py-1 rounded-full">实时反馈</span>
+                        <span class="bg-teal-500 bg-opacity-20 text-teal-400 text-xs px-3 py-1 rounded-full">持续学习</span>
+                        <span class="bg-violet-500 bg-opacity-20 text-violet-400 text-xs px-3 py-1 rounded-full">效果优化</span>
+                    </div>
+                </div>
+
+                <!-- Privacy Protection -->
+                <div class="card p-8 text-center">
+                    <div class="feature-icon floating" style="animation-delay: 0.8s;">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">隐私安全保护</h3>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        采用银行级数据加密存储技术，用户可完全控制信息使用范围。所有分析计算采用匿名化处理，确保个人隐私绝对安全。透明的数据使用说明，让用户清楚了解数据用途，建立长期信任关系。
+                    </p>
+                    <div class="flex flex-wrap gap-2 justify-center">
+                        <span class="bg-red-500 bg-opacity-20 text-red-400 text-xs px-3 py-1 rounded-full">数据加密</span>
+                        <span class="bg-blue-500 bg-opacity-20 text-blue-400 text-xs px-3 py-1 rounded-full">匿名处理</span>
+                        <span class="bg-green-500 bg-opacity-20 text-green-400 text-xs px-3 py-1 rounded-full">透明使用</span>
+                    </div>
+                </div>
+
+                <!-- Community Ecosystem -->
+                <div class="card p-8 text-center">
+                    <div class="feature-icon floating" style="animation-delay: 1s;">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">社区生态平台</h3>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        认证命理师、音乐治疗师入驻平台提供专业咨询服务。用户经验分享交流平台，专家答疑知识科普，线上音律调运挑战活动。构建用户互助情感支持网络，形成专业权威的服务生态系统。
+                    </p>
+                    <div class="flex flex-wrap gap-2 justify-center">
+                        <span class="bg-purple-500 bg-opacity-20 text-purple-400 text-xs px-3 py-1 rounded-full">专家入驻</span>
+                        <span class="bg-yellow-500 bg-opacity-20 text-yellow-400 text-xs px-3 py-1 rounded-full">社区交流</span>
+                        <span class="bg-indigo-500 bg-opacity-20 text-indigo-400 text-xs px-3 py-1 rounded-full">知识科普</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature Comparison -->
+            <div class="max-w-4xl mx-auto">
+                <h3 class="text-3xl font-bold text-center mb-12">与传统方式对比优势</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="card p-8">
+                        <h4 class="text-xl font-bold mb-6 text-red-400">传统命理咨询</h4>
+                        <div class="space-y-4">
+                            <div class="flex items-center text-gray-400">
+                                <i class="fas fa-times text-red-500 mr-3"></i>
+                                <span>依赖个人经验，标准化程度低</span>
+                            </div>
+                            <div class="flex items-center text-gray-400">
+                                <i class="fas fa-times text-red-500 mr-3"></i>
+                                <span>价格昂贵，单次咨询500-2000元</span>
+                            </div>
+                            <div class="flex items-center text-gray-400">
+                                <i class="fas fa-times text-red-500 mr-3"></i>
+                                <span>便利性差，需要预约排队</span>
+                            </div>
+                            <div class="flex items-center text-gray-400">
+                                <i class="fas fa-times text-red-500 mr-3"></i>
+                                <span>缺乏科技支撑，难以验证效果</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card p-8 border-2 border-red-500">
+                        <h4 class="text-xl font-bold mb-6 text-red-400">听运 Ting.Red</h4>
+                        <div class="space-y-4">
+                            <div class="flex items-center text-green-400">
+                                <i class="fas fa-check text-green-500 mr-3"></i>
+                                <span>AI算法标准化，结果可重现</span>
+                            </div>
+                            <div class="flex items-center text-green-400">
+                                <i class="fas fa-check text-green-500 mr-3"></i>
+                                <span>订阅制服务，月费298-1288元</span>
+                            </div>
+                            <div class="flex items-center text-green-400">
+                                <i class="fas fa-check text-green-500 mr-3"></i>
+                                <span>24/7随时可用，即时生成音频</span>
+                            </div>
+                            <div class="flex items-center text-green-400">
+                                <i class="fas fa-check text-green-500 mr-3"></i>
+                                <span>科学量化分析，效果可追踪</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Principles Section -->
+    <section id="technology" class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-6xl font-bold mb-6 gradient-text">技术实现原理</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    深度融合中华传统音律理论与现代人工智能技术，构建科学化的音律调运技术体系
+                </p>
+            </div>
+
+            <!-- Technology Timeline -->
+            <div class="timeline max-w-6xl mx-auto mb-16">
+                <!-- Traditional Theory Foundation -->
+                <div class="timeline-item">
+                    <div class="timeline-content timeline-left">
+                        <div class="flex items-center mb-4">
+                            <div class="text-3xl text-gold mr-4"><i class="fas fa-yin-yang"></i></div>
+                            <h3 class="text-2xl font-bold">传统理论基础</h3>
+                        </div>
+                        <h4 class="text-lg font-semibold mb-3 text-red-400">五音疗法理论体系</h4>
+                        <p class="text-gray-300 mb-4">
+                            基于《黄帝内经》五音疗法理论，宫商角徵羽五音分别对应脾胃、肺大肠、肝胆、心小肠、肾膀胱五脏六腑。通过特定音律频率刺激相应脏腑经络，达到调和气血、平衡阴阳的效果。
+                        </p>
+                        <h4 class="text-lg font-semibold mb-3 text-red-400">十二律吕音律系统</h4>
+                        <p class="text-gray-300 mb-4">
+                            采用中国古代十二律吕音律系统，包括黄钟、太簇、姑洗、蕤宾、夷则、无射六律，以及大吕、应钟、南吕、林钟、仲吕、夹钟六吕，每个律吕都有其特定的频率和能量属性。
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-yellow-500 bg-opacity-20 text-yellow-400 text-xs px-2 py-1 rounded">五音疗法</span>
+                            <span class="bg-purple-500 bg-opacity-20 text-purple-400 text-xs px-2 py-1 rounded">十二律吕</span>
+                            <span class="bg-green-500 bg-opacity-20 text-green-400 text-xs px-2 py-1 rounded">经络调和</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modern Scientific Computing -->
+                <div class="timeline-item">
+                    <div class="timeline-content timeline-right">
+                        <div class="flex items-center mb-4">
+                            <div class="text-3xl text-blue-400 mr-4"><i class="fas fa-atom"></i></div>
+                            <h3 class="text-2xl font-bold">现代科学计算</h3>
+                        </div>
+                        <h4 class="text-lg font-semibold mb-3 text-blue-400">量子振动共振理论</h4>
+                        <p class="text-gray-300 mb-4">
+                            基于量子物理学原理，人体细胞具有特定的振动频率。通过计算个体的生物磁场特征，找到与之共振的音频频率，实现细胞级别的能量调节。结合生物节律计算身体、情绪、智力三大周期的最佳调节时机。
+                        </p>
+                        <h4 class="text-lg font-semibold mb-3 text-blue-400">声学心理学应用</h4>
+                        <p class="text-gray-300 mb-4">
+                            运用现代声学心理学研究成果，不同频率的声波对大脑神经元产生不同影响。α波(8-13Hz)促进放松，β波(13-30Hz)提升专注，θ波(4-8Hz)增强创意，δ波(0.5-4Hz)改善睡眠。
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-blue-500 bg-opacity-20 text-blue-400 text-xs px-2 py-1 rounded">量子共振</span>
+                            <span class="bg-cyan-500 bg-opacity-20 text-cyan-400 text-xs px-2 py-1 rounded">生物节律</span>
+                            <span class="bg-indigo-500 bg-opacity-20 text-indigo-400 text-xs px-2 py-1 rounded">脑波调节</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Algorithm Integration -->
+                <div class="timeline-item">
+                    <div class="timeline-content timeline-left">
+                        <div class="flex items-center mb-4">
+                            <div class="text-3xl text-purple-400 mr-4"><i class="fas fa-brain"></i></div>
+                            <h3 class="text-2xl font-bold">AI算法融合</h3>
+                        </div>
+                        <h4 class="text-lg font-semibold mb-3 text-purple-400">多重算法分析引擎</h4>
+                        <p class="text-gray-300 mb-4">
+                            集成八字五行分析算法，计算个人五行属性、喜用神、忌神关系。紫微斗数解析模块分析命宫、事业宫、财帛宫等十二宫位影响。奇门遁甲算法分析时空能量场变化，易经卦象推演提供时机指导。
+                        </p>
+                        <h4 class="text-lg font-semibold mb-3 text-purple-400">深度学习音频生成</h4>
+                        <p class="text-gray-300 mb-4">
+                            基于Transformer架构的音乐生成模型，训练数据包含10万小时传统音乐和现代治疗音频。参数化音频合成技术精确控制音高、音色、节拍等要素。多层次音效处理算法实现立体声场营造。
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-red-500 bg-opacity-20 text-red-400 text-xs px-2 py-1 rounded">八字分析</span>
+                            <span class="bg-purple-500 bg-opacity-20 text-purple-400 text-xs px-2 py-1 rounded">深度学习</span>
+                            <span class="bg-pink-500 bg-opacity-20 text-pink-400 text-xs px-2 py-1 rounded">音频合成</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Effect Optimization -->
+                <div class="timeline-item">
+                    <div class="timeline-content timeline-right">
+                        <div class="flex items-center mb-4">
+                            <div class="text-3xl text-green-400 mr-4"><i class="fas fa-chart-line"></i></div>
+                            <h3 class="text-2xl font-bold">效果持续优化</h3>
+                        </div>
+                        <h4 class="text-lg font-semibold mb-3 text-green-400">实时反馈学习系统</h4>
+                        <p class="text-gray-300 mb-4">
+                            通过用户使用后的主观感受评分、生理指标监测（心率变化、睡眠质量等）、行为数据分析（使用频次、时长偏好）等多维度数据收集，建立个性化效果评估模型。
+                        </p>
+                        <h4 class="text-lg font-semibold mb-3 text-green-400">智能推荐算法</h4>
+                        <p class="text-gray-300 mb-4">
+                            基于协同过滤和内容推荐相结合的混合推荐算法，分析相似用户群体的偏好模式，结合个人历史使用数据，智能推荐最适合当前状态的音频内容和使用时机。
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-green-500 bg-opacity-20 text-green-400 text-xs px-2 py-1 rounded">实时学习</span>
+                            <span class="bg-teal-500 bg-opacity-20 text-teal-400 text-xs px-2 py-1 rounded">智能推荐</span>
+                            <span class="bg-emerald-500 bg-opacity-20 text-emerald-400 text-xs px-2 py-1 rounded">效果评估</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Architecture -->
+            <div class="max-w-5xl mx-auto">
+                <h3 class="text-3xl font-bold text-center mb-12">技术架构体系</h3>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="card p-8 text-center">
+                        <div class="text-4xl mb-6 text-red-400"><i class="fas fa-database"></i></div>
+                        <h4 class="text-xl font-bold mb-4">数据层</h4>
+                        <div class="text-left space-y-3 text-gray-300">
+                            <div>• 用户基础信息数据库</div>
+                            <div>• 传统文化知识图谱</div>
+                            <div>• 音频样本训练数据集</div>
+                            <div>• 用户行为分析数据仓库</div>
+                            <div>• 效果反馈评估数据</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card p-8 text-center">
+                        <div class="text-4xl mb-6 text-blue-400"><i class="fas fa-cogs"></i></div>
+                        <h4 class="text-xl font-bold mb-4">算法层</h4>
+                        <div class="text-left space-y-3 text-gray-300">
+                            <div>• 传统命理计算引擎</div>
+                            <div>• 现代科学分析模块</div>
+                            <div>• AI音频生成网络</div>
+                            <div>• 个性化推荐算法</div>
+                            <div>• 机器学习优化系统</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card p-8 text-center">
+                        <div class="text-4xl mb-6 text-green-400"><i class="fas fa-mobile-alt"></i></div>
+                        <h4 class="text-xl font-bold mb-4">应用层</h4>
+                        <div class="text-left space-y-3 text-gray-300">
+                            <div>• iOS/Android移动应用</div>
+                            <div>• Web端管理平台</div>
+                            <div>• 小程序轻量版本</div>
+                            <div>• API开放接口服务</div>
+                            <div>• 智能硬件设备集成</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Scenarios Section -->
+    <section id="scenarios" class="py-20 bg-black bg-opacity-30">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-6xl font-bold mb-6 gradient-text">应用场景矩阵</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    覆盖事业、财运、情感、健康四大核心维度，全方位生活场景的智能音律调运解决方案
+                </p>
+            </div>
+
+            <!-- Scenario Categories -->
+            <div class="grid lg:grid-cols-2 gap-12 mb-16">
+                <!-- Career Enhancement -->
+                <div class="card p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="text-4xl text-blue-400 mr-4"><i class="fas fa-briefcase"></i></div>
+                        <h3 class="text-3xl font-bold">事业运势提升</h3>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="border-l-4 border-blue-400 pl-4">
+                            <h4 class="text-lg font-semibold mb-2 text-blue-300">升职加薪专项</h4>
+                            <p class="text-gray-300 mb-3">
+                                激发领导力和创新思维的专属音频组合，增强个人影响力和决策能力。适用于重要汇报、领导沟通、团队管理等关键时刻，提升职场竞争力和晋升机会。
+                            </p>
+                            <div class="text-sm text-blue-400">
+                                <strong>使用场景：</strong>重要会议前30分钟、年度考核期间、项目汇报时
+                            </div>
+                        </div>
+                        
+                        <div class="border-l-4 border-blue-400 pl-4">
+                            <h4 class="text-lg font-semibold mb-2 text-blue-300">人际和谐调节</h4>
+                            <p class="text-gray-300 mb-3">
+                                改善沟通能力和团队协作的音律组合，化解职场矛盾，增进同事关系。通过特定频率调节情绪状态，提升亲和力和感染力，营造和谐工作氛围。
+                            </p>
+                            <div class="text-sm text-blue-400">
+                                <strong>使用场景：</strong>团队建设活动、客户拜访前、冲突调解时
+                            </div>
+                        </div>
+                        
+                        <div class="border-l-4 border-blue-400 pl-4">
+                            <h4 class="text-lg font-semibold mb-2 text-blue-300">创业项目助力</h4>
+                            <p class="text-gray-300 mb-3">
+                                提升执行力和决策力的能量音频，增强创业者的抗压能力和洞察力。帮助在关键商业决策时保持清醒头脑，在融资路演时展现最佳状态。
+                            </p>
+                            <div class="text-sm text-blue-400">
+                                <strong>使用场景：</strong>投资人见面前、产品发布会、重要签约时
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wealth Optimization -->
+                <div class="card p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="text-4xl text-yellow-400 mr-4"><i class="fas fa-coins"></i></div>
+                        <h3 class="text-3xl font-bold">财富运势优化</h3>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="border-l-4 border-yellow-400 pl-4">
+                            <h4 class="text-lg font-semibold mb-2 text-yellow-300">正财增长音律</h4>
+                            <p class="text-gray-300 mb-3">
+                                稳定收入渠道的音律配方，增强工作效率和专业能力，提升薪资待遇和职业发展空间。通过调节大脑专注区域，提高工作产出质量和效率。
+                            </p>
+                            <div class="text-sm text-yellow-400">
+                                <strong>使用场景：</strong>工作日早晨、重要项目期间、绩效考核前
+                            </div>
+                        </div>
+                        
+                        <div class="border-l-4 border-yellow-400 pl-4">
+                            <h4 class="text-lg font-semibold mb-2 text-yellow-300">投资直觉增强</h4>
+                            <p class="text-gray-300 mb-3">
+                                增强财务判断力的专属音频，激活大脑直觉思维区域，提升对市场趋势的敏感度。帮助在投资决策时保持理性分析和直觉判断的平衡。
+                            </p>
+                            <div class="text-sm text-yellow-400">
+                                <strong>使用场景：</strong>股市开盘前、投资决策时、财务规划期间
+                            </div>
+                        </div>
+                        
+                        <div class="border-l-4 border-yellow-400 pl-4">
+                            <h4 class="text-lg font-semibold mb-2 text-yellow-300">财富保值防护</h4>
+                            <p class="text-gray-300 mb-3">
+                                风险防范和理财智慧的音律组合，增强风险识别能力，避免不必要的财务损失。培养谨慎理财的心理状态，建立正确的财富观念。
+                            </p>
+                            <div class="text-sm text-yellow-400">
+                                <strong>使用场景：</strong>大额消费前、投资风险评估时、理财规划制定
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Emotional Harmony -->
+                <div class="card p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="text-4xl text-pink-400 mr-4"><i class="fas fa-heart"></i></div>
+                        <h3 class="text-3xl font-bold">情感关系调和</h3>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="border-l-4 border-pink-400 pl-4">
+                            <h4 class="text-lg font-semibold mb-2 text-pink-300">脱单助力音频</h4>
+                            <p class="text-gray-300 mb-3">
+                                提升个人魅力和异性缘的音频组合，增强自信心和亲和力，改善社交表现。通过调节荷尔蒙分泌和情绪状态，展现最佳的个人魅力。
+                            </p>
+                            <div class="text-sm text-pink-400">
+                                <strong>使用场景：</strong>相亲约会前、社交活动时、表白关键时刻
+                            </div>
+                        </div>
+                        
+                        <div class="border-l-4 border-pink-400 pl-4">
+                            <h4 class="text-lg font-semibold mb-2 text-pink-300">恋爱甜蜜增进</h4>
+                            <p class="text-gray-300 mb-3">
+                                增进情侣感情的和谐音律，促进情感交流和理解，化解恋爱中的小矛盾。营造浪漫温馨的情感氛围，增强彼此的情感连接和依恋关系。
+                            </p>
+                            <div class="text-sm text-pink-400">
+                                <strong>使用场景：</strong>约会前准备、情侣共处时、纪念日庆祝
+                            </div>
+                        </div>
+                        
+                        <div class="border-l-4 border-pink-400 pl-4">
+                            <h4 class="text-lg font-semibold mb-2 text-pink-300">婚姻稳定维护</h4>
+                            <p class="text-gray-300 mb-3">
+                                夫妻能量场平衡的专属配方，促进家庭和睦，增强夫妻默契。帮助处理婚姻中的各种挑战，维持长期稳定的亲密关系。
+                            </p>
+                            <div class="text-sm text-pink-400">
+                                <strong>使用场景：</strong>重要讨论前、家庭聚会时、矛盾调解期间
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Health Regulation -->
+                <div class="card p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="text-4xl text-green-400 mr-4"><i class="fas fa-leaf"></i></div>
+                        <h3 class="text-3xl font-bold">健康状态调节</h3>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="border-l-4 border-green-400 pl-4">
+                            <h4 class="text-lg font-semibold mb-2 text-green-300">五脏调养音疗</h4>
+                            <p class="text-gray-300 mb-3">
+                                针对心肝脾肺肾五脏的专项音律疗法，根据中医五音对五脏的理论，通过特定频率刺激相应脏腑经络，促进气血循环，增强脏腑功能。
+                            </p>
+                            <div class="text-sm text-green-400">
+                                <strong>使用场景：</strong>晨起养生时、餐后消化期、睡前调理
+                            </div>
+                        </div>
+                        
+                        <div class="border-l-4 border-green-400 pl-4">
+                            <h4 class="text-lg font-semibold mb-2 text-green-300">情绪平衡调节</h4>
+                            <p class="text-gray-300 mb-3">
+                                缓解焦虑、抑郁等负面情绪，通过α波和θ波的科学配比，调节大脑神经递质分泌，促进内啡肽和血清素的产生，重建积极正面的心理状态。
+                            </p>
+                            <div class="text-sm text-green-400">
+                                <strong>使用场景：</strong>压力过大时、情绪低落期、焦虑紧张时
+                            </div>
+                        </div>
+                        
+                        <div class="border-l-4 border-green-400 pl-4">
+                            <h4 class="text-lg font-semibold mb-2 text-green-300">精力恢复充沛</h4>
+                            <p class="text-gray-300 mb-3">
+                                改善睡眠质量和精神状态，通过δ波促进深度睡眠，β波提升日间精力。优化生物钟节律，增强免疫系统功能，保持最佳身心状态。
+                            </p>
+                            <div class="text-sm text-green-400">
+                                <strong>使用场景：</strong>睡前助眠时、午休恢复期、疲劳恢复时
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Time-based Scenarios -->
+            <div class="max-w-5xl mx-auto">
+                <h3 class="text-3xl font-bold text-center mb-12">时间场景定制</h3>
+                <div class="grid md:grid-cols-4 gap-6">
+                    <div class="card p-6 text-center">
+                        <div class="text-3xl mb-4 text-orange-400"><i class="fas fa-sun"></i></div>
+                        <h4 class="text-lg font-bold mb-3">晨起激活</h4>
+                        <p class="text-gray-300 text-sm mb-4">
+                            专属起床铃声，开启一天正能量。激活交感神经系统，提升精神状态，为新的一天注入活力。
+                        </p>
+                        <div class="text-xs text-orange-400">06:00-08:00 推荐使用</div>
+                    </div>
+                    
+                    <div class="card p-6 text-center">
+                        <div class="text-3xl mb-4 text-blue-400"><i class="fas fa-laptop"></i></div>
+                        <h4 class="text-lg font-bold mb-3">工作专注</h4>
+                        <p class="text-gray-300 text-sm mb-4">
+                            提升效率的背景音频。增强注意力集中度，屏蔽外界干扰，进入心流状态，提高工作产出质量。
+                        </p>
+                        <div class="text-xs text-blue-400">09:00-17:00 工作时段</div>
+                    </div>
+                    
+                    <div class="card p-6 text-center">
+                        <div class="text-3xl mb-4 text-yellow-400"><i class="fas fa-coffee"></i></div>
+                        <h4 class="text-lg font-bold mb-3">午休恢复</h4>
+                        <p class="text-gray-300 text-sm mb-4">
+                            短时间快速充电的音律。促进θ波产生，快速进入浅睡眠状态，高效恢复精力和注意力。
+                        </p>
+                        <div class="text-xs text-yellow-400">12:00-14:00 午休时间</div>
+                    </div>
+                    
+                    <div class="card p-6 text-center">
+                        <div class="text-3xl mb-4 text-purple-400"><i class="fas fa-moon"></i></div>
+                        <h4 class="text-lg font-bold mb-3">晚间放松</h4>
+                        <p class="text-gray-300 text-sm mb-4">
+                            助眠和潜意识调节音频。促进副交感神经活跃，降低皮质醇分泌，引导进入深度睡眠状态。
+                        </p>
+                        <div class="text-xs text-purple-400">21:00-23:00 睡前准备</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Packages Section -->
+    <section id="pricing" class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-6xl font-bold mb-6 gradient-text">服务套餐体系</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    灵活的订阅制服务模式，满足不同层次用户的个性化需求
+                </p>
+                <div class="mt-8 bg-black bg-opacity-50 rounded-lg p-6 max-w-2xl mx-auto">
+                    <p class="text-lg text-gold font-semibold">🎉 新用户福利：免费体验7天专业版功能</p>
+                    <p class="text-gray-400 mt-2">年付订阅享受15%优惠，三年付享受25%优惠</p>
+                </div>
+            </div>
+
+            <!-- Pricing Cards -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto mb-16">
+                <!-- Free Basic -->
+                <div class="pricing-card p-8">
+                    <div class="text-center mb-6">
+                        <div class="text-3xl mb-4 text-gray-400"><i class="fas fa-seedling"></i></div>
+                        <h3 class="text-2xl font-bold mb-2">体验版</h3>
+                        <div class="text-4xl font-bold text-gray-400 mb-2">免费</div>
+                        <p class="text-gray-500">基础功能体验</p>
+                    </div>
+                    <div class="space-y-3 mb-8">
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-3"></i>
+                            <span class="text-sm">基本信息分析和运势概况</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-3"></i>
+                            <span class="text-sm">每日一首调运音乐推送</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-3"></i>
+                            <span class="text-sm">简单使用指导和效果解读</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-3"></i>
+                            <span class="text-sm">社区交流和经验分享</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-times text-gray-500 mr-3"></i>
+                            <span class="text-sm text-gray-500">个性化音频生成</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-times text-gray-500 mr-3"></i>
+                            <span class="text-sm text-gray-500">多场景定制功能</span>
+                        </div>
+                    </div>
+                    <button class="w-full bg-gray-600 hover:bg-gray-500 text-white py-3 rounded-lg font-bold transition">
+                        立即注册
+                    </button>
+                </div>
+
+                <!-- Standard Package -->
+                <div class="pricing-card p-8">
+                    <div class="text-center mb-6">
+                        <div class="text-3xl mb-4 text-blue-400"><i class="fas fa-star"></i></div>
+                        <h3 class="text-2xl font-bold mb-2">标准版</h3>
+                        <div class="text-4xl font-bold text-blue-400 mb-2">¥298</div>
+                        <p class="text-gray-400">月付 / 完整功能体验</p>
+                    </div>
+                    <div class="space-y-3 mb-8">
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-3"></i>
+                            <span class="text-sm">深度多维分析报告</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-3"></i>
+                            <span class="text-sm">无限制个性化音频生成</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-3"></i>
+                            <span class="text-sm">4大场景定制音频库</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-3"></i>
+                            <span class="text-sm">智能推荐和使用指导</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-3"></i>
+                            <span class="text-sm">效果跟踪和数据分析</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-times text-gray-500 mr-3"></i>
+                            <span class="text-sm text-gray-500">专家一对一咨询</span>
+                        </div>
+                    </div>
+                    <button class="w-full btn-primary py-3 rounded-lg font-bold">
+                        选择标准版
+                    </button>
+                </div>
+
+                <!-- Professional Package -->
+                <div class="pricing-card pricing-featured p-8">
+                    <div class="text-center mb-6">
+                        <div class="text-3xl mb-4 text-red-400"><i class="fas fa-crown"></i></div>
+                        <h3 class="text-2xl font-bold mb-2">专业版</h3>
+                        <div class="text-4xl font-bold text-red-400 mb-2">¥598</div>
+                        <p class="text-gray-400">月付 / 高级功能全开</p>
+                    </div>
+                    <div class="space-y-3 mb-8">
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-3"></i>
+                            <span class="text-sm">标准版全部功能</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-3"></i>
+                            <span class="text-sm">专业运势咨询和指导</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-3"></i>
+                            <span class="text-sm">重要时刻专属音频定制</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-3"></i>
+                            <span class="text-sm">年度运势规划服务</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-3"></i>
+                            <span class="text-sm">优先客服支持</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-3"></i>
+                            <span class="text-sm">新功能优先体验权</span>
+                        </div>
+                    </div>
+                    <button class="w-full btn-secondary py-3 rounded-lg font-bold">
+                        选择专业版
+                    </button>
+                </div>
+
+                <!-- Premium Package -->
+                <div class="pricing-card p-8">
+                    <div class="text-center mb-6">
+                        <div class="text-3xl mb-4 text-gold"><i class="fas fa-gem"></i></div>
+                        <h3 class="text-2xl font-bold mb-2">至尊版</h3>
+                        <div class="text-4xl font-bold text-gold mb-2">¥1288</div>
+                        <p class="text-gray-400">月付 / VIP专属服务</p>
+                    </div>
+                    <div class="space-y-3 mb-8">
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-3"></i>
+                            <span class="text-sm">专业版全部功能</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-3"></i>
+                            <span class="text-sm">一对一深度分析咨询</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-3"></i>
+                            <span class="text-sm">专属命理师月度指导</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-3"></i>
+                            <span class="text-sm">家庭/情侣合盘分析</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-3"></i>
+                            <span class="text-sm">24/7专属客服热线</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-3"></i>
+                            <span class="text-sm">线下活动优先邀请</span>
+                        </div>
+                    </div>
+                    <button class="w-full bg-gradient-to-r from-yellow-400 to-yellow-600 text-black py-3 rounded-lg font-bold hover:from-yellow-500 hover:to-yellow-700 transition">
+                        选择至尊版
+                    </button>
+                </div>
+            </div>
+
+            <!-- Additional Services -->
+            <div class="max-w-5xl mx-auto">
+                <h3 class="text-3xl font-bold text-center mb-12">增值定制服务</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="card p-8">
+                        <h4 class="text-2xl font-bold mb-6 text-red-400">个人定制服务</h4>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center border-b border-gray-700 pb-3">
+                                <div>
+                                    <h5 class="font-semibold">重要场合定制音频</h5>
+                                    <p class="text-sm text-gray-400">面试、相亲、重要会议专属音频</p>
+                                </div>
+                                <div class="text-lg font-bold text-red-400">¥1999/次</div>
+                            </div>
+                            <div class="flex justify-between items-center border-b border-gray-700 pb-3">
+                                <div>
+                                    <h5 class="font-semibold">个人年度运势规划</h5>
+                                    <p class="text-sm text-gray-400">全年运势分析+音律调运计划</p>
+                                </div>
+                                <div class="text-lg font-bold text-red-400">¥3999/年</div>
+                            </div>
+                            <div class="flex justify-between items-center border-b border-gray-700 pb-3">
+                                <div>
+                                    <h5 class="font-semibold">夫妻/情侣合盘分析</h5>
+                                    <p class="text-sm text-gray-400">关系分析+双人调运方案</p>
+                                </div>
+                                <div class="text-lg font-bold text-red-400">¥1499/次</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card p-8">
+                        <h4 class="text-2xl font-bold mb-6 text-blue-400">企业团队服务</h4>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center border-b border-gray-700 pb-3">
+                                <div>
+                                    <h5 class="font-semibold">团队能量场调节</h5>
+                                    <p class="text-sm text-gray-400">提升团队协作和工作效率</p>
+                                </div>
+                                <div class="text-lg font-bold text-blue-400">¥50000/项目</div>
+                            </div>
+                            <div class="flex justify-between items-center border-b border-gray-700 pb-3">
+                                <div>
+                                    <h5 class="font-semibold">企业文化音律定制</h5>
+                                    <p class="text-sm text-gray-400">专属企业文化音频品牌</p>
+                                </div>
+                                <div class="text-lg font-bold text-blue-400">¥100000/年</div>
+                            </div>
+                            <div class="flex justify-between items-center border-b border-gray-700 pb-3">
+                                <div>
+                                    <h5 class="font-semibold">API技术服务授权</h5>
+                                    <p class="text-sm text-gray-400">音频生成技术对外输出</p>
+                                </div>
+                                <div class="text-lg font-bold text-blue-400">按调用计费</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment Methods -->
+            <div class="mt-16 text-center">
+                <h3 class="text-2xl font-bold mb-8">安全支付方式</h3>
+                <div class="flex flex-wrap justify-center items-center gap-8 mb-8">
+                    <div class="flex items-center space-x-4">
+                        <i class="fab fa-alipay text-4xl text-blue-500"></i>
+                        <i class="fab fa-weixin text-4xl text-green-500"></i>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <i class="fab fa-cc-visa text-4xl text-blue-600"></i>
+                        <i class="fab fa-cc-mastercard text-4xl text-red-500"></i>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <i class="fab fa-apple-pay text-4xl text-gray-400"></i>
+                        <i class="fab fa-google-pay text-4xl text-blue-400"></i>
+                    </div>
+                </div>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    支持支付宝、微信支付、银行卡、Apple Pay、Google Pay等多种支付方式。
+                    所有交易采用SSL加密技术，确保资金安全。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section id="partners" class="py-20 bg-black bg-opacity-30">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-6xl font-bold mb-6 gradient-text">战略合作伙伴</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    与业界顶尖机构深度合作，共同推动AI音律调运技术的发展与应用
+                </p>
+            </div>
+
+            <!-- Technology Partners -->
+            <div class="mb-16">
+                <h3 class="text-2xl font-bold text-center mb-8 text-blue-400">技术合作伙伴</h3>
+                <div class="grid md:grid-cols-4 gap-8">
+                    <div class="card p-6 text-center">
+                        <div class="text-4xl mb-4 text-blue-500"><i class="fab fa-microsoft"></i></div>
+                        <h4 class="text-lg font-bold mb-2">Microsoft Azure</h4>
+                        <p class="text-sm text-gray-400">云计算基础设施与AI服务支持</p>
+                    </div>
+                    <div class="card p-6 text-center">
+                        <div class="text-4xl mb-4 text-green-500"><i class="fas fa-microchip"></i></div>
+                        <h4 class="text-lg font-bold mb-2">NVIDIA</h4>
+                        <p class="text-sm text-gray-400">GPU算力支持与深度学习优化</p>
+                    </div>
+                    <div class="card p-6 text-center">
+                        <div class="text-4xl mb-4 text-orange-500"><i class="fab fa-aws"></i></div>
+                        <h4 class="text-lg font-bold mb-2">Amazon Web Services</h4>
+                        <p class="text-sm text-gray-400">弹性云服务与大数据处理</p>
+                    </div>
+                    <div class="card p-6 text-center">
+                        <div class="text-4xl mb-4 text-red-500"><i class="fas fa-brain"></i></div>
+                        <h4 class="text-lg font-bold mb-2">百度飞桨</h4>
+                        <p class="text-sm text-gray-400">深度学习框架与模型训练</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Academic Partners -->
+            <div class="mb-16">
+                <h3 class="text-2xl font-bold text-center mb-8 text-purple-400">学术研究伙伴</h3>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="card p-8 text-center">
+                        <div class="text-4xl mb-4 text-red-600"><i class="fas fa-university"></i></div>
+                        <h4 class="text-xl font-bold mb-3">清华大学</h4>
+                        <p class="text-gray-300 mb-4">人工智能研究院</p>
+                        <p class="text-sm text-gray-400">AI音频生成算法联合研发，音律心理学效应研究验证</p>
+                    </div>
+                    <div class="card p-8 text-center">
+                        <div class="text-4xl mb-4 text-blue-600"><i class="fas fa-microscope"></i></div>
+                        <h4 class="text-xl font-bold mb-3">中科院</h4>
+                        <p class="text-gray-300 mb-4">心理研究所</p>
+                        <p class="text-sm text-gray-400">音频对大脑神经活动影响的科学实验与数据收集分析</p>
+                    </div>
+                    <div class="card p-8 text-center">
+                        <div class="text-4xl mb-4 text-green-600"><i class="fas fa-leaf"></i></div>
+                        <h4 class="text-xl font-bold mb-3">北京中医药大学</h4>
+                        <p class="text-gray-300 mb-4">传统医学研究院</p>
+                        <p class="text-sm text-gray-400">中医音律理论现代化应用，五音疗法科学验证研究</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Industry Partners -->
+            <div class="mb-16">
+                <h3 class="text-2xl font-bold text-center mb-8 text-gold">产业生态伙伴</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="card p-8">
+                        <h4 class="text-xl font-bold mb-6 text-yellow-400">音频平台合作</h4>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="flex items-center p-4 bg-black bg-opacity-50 rounded-lg">
+                                <i class="fas fa-podcast text-2xl text-orange-500 mr-3"></i>
+                                <div>
+                                    <h5 class="font-semibold">喜马拉雅</h5>
+                                    <p class="text-xs text-gray-400">内容分发合作</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center p-4 bg-black bg-opacity-50 rounded-lg">
+                                <i class="fas fa-music text-2xl text-green-500 mr-3"></i>
+                                <div>
+                                    <h5 class="font-semibold">网易云音乐</h5>
+                                    <p class="text-xs text-gray-400">音频推广渠道</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center p-4 bg-black bg-opacity-50 rounded-lg">
+                                <i class="fas fa-headphones text-2xl text-blue-500 mr-3"></i>
+                                <div>
+                                    <h5 class="font-semibold">蜻蜓FM</h5>
+                                    <p class="text-xs text-gray-400">专属频道开设</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center p-4 bg-black bg-opacity-50 rounded-lg">
+                                <i class="fas fa-broadcast-tower text-2xl text-purple-500 mr-3"></i>
+                                <div>
+                                    <h5 class="font-semibold">荔枝FM</h5>
+                                    <p class="text-xs text-gray-400">互动直播合作</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card p-8">
+                        <h4 class="text-xl font-bold mb-6 text-green-400">健康生态合作</h4>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="flex items-center p-4 bg-black bg-opacity-50 rounded-lg">
+                                <i class="fas fa-running text-2xl text-orange-500 mr-3"></i>
+                                <div>
+                                    <h5 class="font-semibold">Keep</h5>
+                                    <p class="text-xs text-gray-400">运动音频定制</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center p-4 bg-black bg-opacity-50 rounded-lg">
+                                <i class="fas fa-bed text-2xl text-purple-500 mr-3"></i>
+                                <div>
+                                    <h5 class="font-semibold">小睡眠</h5>
+                                    <p class="text-xs text-gray-400">助眠音频合作</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center p-4 bg-black bg-opacity-50 rounded-lg">
+                                <i class="fas fa-spa text-2xl text-teal-500 mr-3"></i>
+                                <div>
+                                    <h5 class="font-semibold">冥想星球</h5>
+                                    <p class="text-xs text-gray-400">冥想音频联动</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center p-4 bg-black bg-opacity-50 rounded-lg">
+                                <i class="fas fa-heartbeat text-2xl text-red-500 mr-3"></i>
+                                <div>
+                                    <h5 class="font-semibold">薄荷健康</h5>
+                                    <p class="text-xs text-gray-400">健康数据对接</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Investment Partners -->
+            <div>
+                <h3 class="text-2xl font-bold text-center mb-8 text-red-400">投资合作伙伴</h3>
+                <div class="flex flex-wrap justify-center items-center gap-12 opacity-80">
+                    <div class="text-center">
+                        <div class="text-3xl mb-2 text-red-500"><i class="fas fa-hand-holding-usd"></i></div>
+                        <h5 class="font-semibold">红杉资本中国</h5>
+                        <p class="text-xs text-gray-400">A轮领投</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl mb-2 text-blue-500"><i class="fas fa-chart-line"></i></div>
+                        <h5 class="font-semibold">腾讯投资</h5>
+                        <p class="text-xs text-gray-400">战略投资</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl mb-2 text-green-500"><i class="fas fa-coins"></i></div>
+                        <h5 class="font-semibold">IDG资本</h5>
+                        <p class="text-xs text-gray-400">天使轮投资</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl mb-2 text-purple-500"><i class="fas fa-rocket"></i></div>
+                        <h5 class="font-semibold">启明创投</h5>
+                        <p class="text-xs text-gray-400">Pre-A轮投资</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-6xl font-bold mb-6 gradient-text">关于听运</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    致力于用AI技术传承和发扬中华音律文化，为现代人提供身心和谐的智慧解决方案
+                </p>
+            </div>
+
+            <!-- Company Mission -->
+            <div class="max-w-5xl mx-auto mb-16">
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="card p-8 text-center">
+                        <div class="text-4xl mb-6 text-red-400"><i class="fas fa-bullseye"></i></div>
+                        <h3 class="text-2xl font-bold mb-4">使命</h3>
+                        <p class="text-gray-300 leading-relaxed">
+                            用AI技术传承和发扬中华音律文化，为现代人提供身心和谐的智慧解决方案，让古老的音律智慧在新时代焕发生机。
+                        </p>
+                    </div>
+                    
+                    <div class="card p-8 text-center">
+                        <div class="text-4xl mb-6 text-blue-400"><i class="fas fa-eye"></i></div>
+                        <h3 class="text-2xl font-bold mb-4">愿景</h3>
+                        <p class="text-gray-300 leading-relaxed">
+                            成为全球领先的智能音律调运平台，让每个人都能享受到个性化的音律养生服务，推动传统文化与现代科技的完美融合。
+                        </p>
+                    </div>
+                    
+                    <div class="card p-8 text-center">
+                        <div class="text-4xl mb-6 text-gold"><i class="fas fa-heart"></i></div>
+                        <h3 class="text-2xl font-bold mb-4">价值观</h3>
+                        <p class="text-gray-300 leading-relaxed">
+                            传承创新、科学严谨、用户至上、开放共赢。在传承中创新，在创新中传承，一切以用户价值为核心。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Introduction -->
+            <div class="mb-16">
+                <h3 class="text-3xl font-bold text-center mb-12">核心团队</h3>
+                <div class="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                    <div class="card p-8 text-center">
+                        <div class="w-24 h-24 bg-gradient-to-br from-red-400 to-red-600 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl font-bold">
+                            CEO
+                        </div>
+                        <h4 class="text-xl font-bold mb-2">创始人 & CEO</h4>
+                        <p class="text-red-400 mb-3">产品与战略</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">
+                            互联网产品经验10年以上，传统文化深度研究背景，成功创业经历和融资经验，强烈的文化使命感和商业敏感度。
+                        </p>
+                    </div>
+                    
+                    <div class="card p-8 text-center">
+                        <div class="w-24 h-24 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl font-bold">
+                            CTO
+                        </div>
+                        <h4 class="text-xl font-bold mb-2">联合创始人 & CTO</h4>
+                        <p class="text-blue-400 mb-3">技术与研发</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">
+                            AI/机器学习领域技术专家，大厂技术团队管理经验，音频处理和生成技术专长，系统架构和工程化能力。
+                        </p>
+                    </div>
+                    
+                    <div class="card p-8 text-center">
+                        <div class="w-24 h-24 bg-gradient-to-br from-green-400 to-green-600 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl font-bold">
+                            CPO
+                        </div>
+                        <h4 class="text-xl font-bold mb-2">联合创始人 & CPO</h4>
+                        <p class="text-green-400 mb-3">产品与运营</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">
+                            互联网产品设计和运营专家，用户增长和数据分析能力，传统文化产品化经验，优秀的用户洞察和体验设计能力。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Company Advantages -->
+            <div class="mb-16">
+                <h3 class="text-3xl font-bold text-center mb-12">核心优势</h3>
+                <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                    <div class="card p-8">
+                        <h4 class="text-2xl font-bold mb-6 text-red-400">技术壁垒</h4>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-red-500 bg-opacity-20 rounded-lg flex items-center justify-center mr-4 mt-1">
+                                    <i class="fas fa-cog text-red-400"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold mb-1">算法创新</h5>
+                                    <p class="text-gray-300 text-sm">传统命理理论的算法化实现，AI音频生成的个性化定制，多维数据融合分析技术。</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-red-500 bg-opacity-20 rounded-lg flex items-center justify-center mr-4 mt-1">
+                                    <i class="fas fa-database text-red-400"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold mb-1">数据积累</h5>
+                                    <p class="text-gray-300 text-sm">用户行为数据积累，音频效果数据库，传统文化知识图谱，科学验证数据集。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card p-8">
+                        <h4 class="text-2xl font-bold mb-6 text-blue-400">文化优势</h4>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-blue-500 bg-opacity-20 rounded-lg flex items-center justify-center mr-4 mt-1">
+                                    <i class="fas fa-yin-yang text-blue-400"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold mb-1">文化认同</h5>
+                                    <p class="text-gray-300 text-sm">深度契合中国文化特色，满足用户文化归属感需求，具备强烈的情感连接。</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-blue-500 bg-opacity-20 rounded-lg flex items-center justify-center mr-4 mt-1">
+                                    <i class="fas fa-award text-blue-400"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold mb-1">专业权威</h5>
+                                    <p class="text-gray-300 text-sm">传统文化领域的专业形象，科技创新的先锋地位，用户口碑的持续积累。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Development Milestones -->
+            <div class="mb-16">
+                <h3 class="text-3xl font-bold text-center mb-12">发展历程</h3>
+                <div class="timeline max-w-4xl mx-auto">
+                    <div class="timeline-item">
+                        <div class="timeline-content timeline-left">
+                            <div class="flex items-center mb-3">
+                                <div class="text-2xl font-bold text-gold mr-3">2023.06</div>
+                                <div class="text-lg font-semibold">项目启动</div>
+                            </div>
+                            <p class="text-gray-300 mb-2">完成前期市场调研和技术可行性分析，组建核心创始团队，确定产品定位和发展方向。</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content timeline-right">
+                            <div class="flex items-center mb-3">
+                                <div class="text-2xl font-bold text-gold mr-3">2023.12</div>
+                                <div class="text-lg font-semibold">天使轮融资</div>
+                            </div>
+                            <p class="text-gray-300 mb-2">完成500万元天使轮融资，搭建技术团队，开始MVP产品开发，建立基础算法框架。</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content timeline-left">
+                            <div class="flex items-center mb-3">
+                                <div class="text-2xl font-bold text-gold mr-3">2024.06</div>
+                                <div class="text-lg font-semibold">产品内测</div>
+                            </div>
+                            <p class="text-gray-300 mb-2">发布内测版本，获得1000名种子用户，收集用户反馈，验证核心功能有效性。</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content timeline-right">
+                            <div class="flex items-center mb-3">
+                                <div class="text-2xl font-bold text-gold mr-3">2024.12</div>
+                                <div class="text-lg font-semibold">正式上线</div>
+                            </div>
+                            <p class="text-gray-300 mb-2">产品正式上线，用户规模突破5万人，完成Pre-A轮2000万元融资，建立品牌知名度。</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content timeline-left">
+                            <div class="flex items-center mb-3">
+                                <div class="text-2xl font-bold text-red-400 mr-3">2025.06</div>
+                                <div class="text-lg font-semibold">规模化发展</div>
+                            </div>
+                            <p class="text-gray-300 mb-2">预计用户规模达到30万人，完成A轮5000万元融资，启动全国市场推广。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Value -->
+            <div>
+                <h3 class="text-3xl font-bold text-center mb-12">社会价值</h3>
+                <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                    <div class="card p-8">
+                        <h4 class="text-xl font-bold mb-4 text-purple-400">文化传承价值</h4>
+                        <div class="space-y-3 text-gray-300">
+                            <div>• 用科技手段保护和传承优秀传统文化</div>
+                            <div>• 让年轻一代重新认识和喜爱传统智慧</div>
+                            <div>• 推动传统文化在新时代的创新发展</div>
+                            <div>• 提升中华文化的国际影响力和传播力</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card p-8">
+                        <h4 class="text-xl font-bold mb-4 text-green-400">健康福祉价值</h4>
+                        <div class="space-y-3 text-gray-300">
+                            <div>• 为现代人提供绿色、健康的调节方式</div>
+                            <div>• 缓解社会压力和心理健康问题</div>
+                            <div>• 提升全民身心健康水平</div>
+                            <div>• 推广科学的养生理念和生活方式</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card p-8">
+                        <h4 class="text-xl font-bold mb-4 text-blue-400">科技创新价值</h4>
+                        <div class="space-y-3 text-gray-300">
+                            <div>• 推动AI技术在传统文化领域的应用</div>
+                            <div>• 探索科技与人文融合的新模式</div>
+                            <div>• 为相关行业提供技术示范和参考</div>
+                            <div>• 促进跨学科研究和产学研合作</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card p-8">
+                        <h4 class="text-xl font-bold mb-4 text-yellow-400">经济发展价值</h4>
+                        <div class="space-y-3 text-gray-300">
+                            <div>• 创造新的产业模式和就业机会</div>
+                            <div>• 推动文化产业和科技产业融合发展</div>
+                            <div>• 提升中国文化科技产业的国际竞争力</div>
+                            <div>• 培育具有中国特色的创新生态</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-black bg-opacity-30">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-6xl font-bold mb-6 gradient-text">联系我们</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    欢迎与我们联系，共同探索AI音律调运技术的无限可能
+                </p>
+            </div>
+
+            <div class="max-w-6xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-12">
+                    <!-- Contact Information -->
+                    <div class="card p-8">
+                        <h3 class="text-3xl font-bold mb-8">联系方式</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-red-500 bg-opacity-20 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fas fa-envelope text-red-400 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-1">商务合作</h4>
+                                    <p class="text-gray-400">business@ting.red</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-blue-500 bg-opacity-20 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fas fa-handshake text-blue-400 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-1">投资咨询</h4>
+                                    <p class="text-gray-400">invest@ting.red</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-green-500 bg-opacity-20 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fas fa-newspaper text-green-400 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-1">媒体联系</h4>
+                                    <p class="text-gray-400">media@ting.red</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-purple-500 bg-opacity-20 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fas fa-headset text-purple-400 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-1">客户服务</h4>
+                                    <p class="text-gray-400">support@ting.red</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-yellow-500 bg-opacity-20 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fas fa-map-marker-alt text-yellow-400 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-1">公司地址</h4>
+                                    <p class="text-gray-400">北京市朝阳区望京SOHO T1 18层</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Social Media -->
+                        <div class="mt-8 pt-8 border-t border-gray-700">
+                            <h4 class="text-lg font-semibold mb-4">关注我们</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="w-10 h-10 bg-blue-500 bg-opacity-20 rounded-lg flex items-center justify-center hover:bg-opacity-40 transition">
+                                    <i class="fab fa-weixin text-blue-400"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 bg-red-500 bg-opacity-20 rounded-lg flex items-center justify-center hover:bg-opacity-40 transition">
+                                    <i class="fab fa-weibo text-red-400"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 bg-blue-600 bg-opacity-20 rounded-lg flex items-center justify-center hover:bg-opacity-40 transition">
+                                    <i class="fab fa-zhihu text-blue-600"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 bg-red-600 bg-opacity-20 rounded-lg flex items-center justify-center hover:bg-opacity-40 transition">
+                                    <i class="fas fa-book text-red-600"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="card p-8">
+                        <h3 class="text-3xl font-bold mb-8">发送消息</h3>
+                        <form class="space-y-6">
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-semibold mb-2">姓名</label>
+                                    <input type="text" class="w-full px-4 py-3 bg-black bg-opacity-50 border border-gray-600 rounded-lg focus:border-red-400 focus:outline-none transition" placeholder="请输入您的姓名">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold mb-2">公司</label>
+                                    <input type="text" class="w-full px-4 py-3 bg-black bg-opacity-50 border border-gray-600 rounded-lg focus:border-red-400 focus:outline-none transition" placeholder="请输入公司名称">
+                                </div>
+                            </div>
+                            
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-semibold mb-2">邮箱</label>
+                                    <input type="email" class="w-full px-4 py-3 bg-black bg-opacity-50 border border-gray-600 rounded-lg focus:border-red-400 focus:outline-none transition" placeholder="请输入邮箱地址">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold mb-2">电话</label>
+                                    <input type="tel" class="w-full px-4 py-3 bg-black bg-opacity-50 border border-gray-600 rounded-lg focus:border-red-400 focus:outline-none transition" placeholder="请输入联系电话">
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-semibold mb-2">合作类型</label>
+                                <select class="w-full px-4 py-3 bg-black bg-opacity-50 border border-gray-600 rounded-lg focus:border-red-400 focus:outline-none transition">
+                                    <option>请选择合作类型</option>
+                                    <option>技术合作</option>
+                                    <option>渠道合作</option>
+                                    <option>投资合作</option>
+                                    <option>API授权</option>
+                                    <option>其他合作</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-semibold mb-2">详细信息</label>
+                                <textarea rows="4" class="w-full px-4 py-3 bg-black bg-opacity-50 border border-gray-600 rounded-lg focus:border-red-400 focus:outline-none transition" placeholder="请详细描述您的需求或合作意向"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="w-full btn-primary py-3 rounded-lg font-bold text-lg">
+                                <i class="fas fa-paper-plane mr-2"></i>发送消息
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 bg-black">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <a href="#" class="flex items-center space-x-3 mb-6">
+                        <div class="logo-font text-3xl">听运 Ting.Red</div>
+                    </a>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        基于传统音律理论与现代AI技术的智能音频调运系统，让音律成为你的幸运密码。
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-red-400 text-xl transition"><i class="fab fa-weixin"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-red-400 text-xl transition"><i class="fab fa-weibo"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-red-400 text-xl transition"><i class="fab fa-zhihu"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-red-400 text-xl transition"><i class="fas fa-book"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">产品服务</h3>
+                    <ul class="space-y-3 text-gray-400">
+                        <li><a href="#features" class="hover:text-white transition">核心功能</a></li>
+                        <li><a href="#technology" class="hover:text-white transition">技术原理</a></li>
+                        <li><a href="#scenarios" class="hover:text-white transition">应用场景</a></li>
+                        <li><a href="#pricing" class="hover:text-white transition">服务套餐</a></li>
+                        <li><a href="#download" class="hover:text-white transition">下载体验</a></li>
+                        <li><a href="#" class="hover:text-white transition">API服务</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">公司信息</h3>
+                    <ul class="space-y-3 text-gray-400">
+                        <li><a href="#about" class="hover:text-white transition">关于我们</a></li>
+                        <li><a href="#partners" class="hover:text-white transition">合作伙伴</a></li>
+                        <li><a href="#" class="hover:text-white transition">新闻动态</a></li>
+                        <li><a href="#" class="hover:text-white transition">招聘信息</a></li>
+                        <li><a href="#contact" class="hover:text-white transition">联系我们</a></li>
+                        <li><a href="#" class="hover:text-white transition">投资者关系</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">帮助支持</h3>
+                    <ul class="space-y-3 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">使用帮助</a></li>
+                        <li><a href="#" class="hover:text-white transition">常见问题</a></li>
+                        <li><a href="#" class="hover:text-white transition">用户协议</a></li>
+                        <li><a href="#" class="hover:text-white transition">隐私政策</a></li>
+                        <li><a href="#" class="hover:text-white transition">意见反馈</a></li>
+                        <li><a href="#" class="hover:text-white transition">客服中心</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="text-gray-500 text-sm mb-4 md:mb-0">
+                        © 2024 听运 Ting.Red 智能音律调运系统。保留所有权利。
+                    </div>
+                    <div class="flex flex-wrap gap-6 text-sm">
+                        <span class="text-gray-500">京ICP备xxxxxxx号</span>
+                        <span class="text-gray-500">京公网安备xxxxxxxxxxxxxxxx号</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <a href="#download" class="bg-red-600 hover:bg-red-700 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 pulse">
+            <i class="fas fa-download text-xl"></i>
+        </a>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button class="fixed bottom-6 left-6 bg-black bg-opacity-70 hover:bg-opacity-90 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 z-50" id="scrollToTop" style="display: none;">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Navigation scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            const scrollToTop = document.getElementById('scrollToTop');
+            
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            if (window.scrollY > 500) {
+                scrollToTop.style.display = 'flex';
+            } else {
+                scrollToTop.style.display = 'none';
+            }
+        });
+
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            const icon = menuToggle.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Scroll to top functionality
+        document.getElementById('scrollToTop').addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    // Close mobile menu
+                    mobileMenu.classList.remove('active');
+                    const icon = menuToggle.querySelector('i');
+                    icon.classList.add('fa-bars');
+                    icon.classList.remove('fa-times');
+                }
+            });
+        });
+
+        // Card hover effects
+        const cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-5px)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards and feature elements
+        document.querySelectorAll('.card, .feature-icon, .timeline-content').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Add dynamic typing effect for hero title
+        function typeWriter(element, text, speed = 100) {
+            let i = 0;
+            element.innerHTML = '';
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Form submission handling
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>发送中...';
+            btn.disabled = true;
+            
+            // Simulate form submission
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fas fa-check mr-2"></i>发送成功!';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                    this.reset();
+                }, 2000);
+            }, 2000);
+        });
+
+        // Add loading animation when page loads
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '1';
+            document.body.style.transition = 'opacity 0.5s ease';
+        });
+
+        // Initialize page with loading state
+        document.body.style.opacity = '0';
+
+        // Pricing card selection effect
+        document.querySelectorAll('.pricing-card button').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const card = this.closest('.pricing-card');
+                const planName = card.querySelector('h3').textContent;
+                
+                // Add selection effect
+                document.querySelectorAll('.pricing-card').forEach(c => c.classList.remove('border-red-500'));
+                card.classList.add('border-red-500');
+                
+                // Show confirmation message
+                const originalText = this.innerHTML;
+                this.innerHTML = '<i class="fas fa-check mr-2"></i>已选择';
+                this.disabled = true;
+                
+                setTimeout(() => {
+                    this.innerHTML = originalText;
+                    this.disabled = false;
+                    card.classList.remove('border-red-500');
+                }, 3000);
+                
+                console.log(`Selected plan: ${planName}`);
+            });
+        });
+
+        // Add parallax effect to hero background
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroBackground = document.querySelector('.hero-bg');
+            if (heroBackground) {
+                heroBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        // Sound wave animation sync
+        function animateSoundWaves() {
+            const waves = document.querySelectorAll('.sound-wave');
+            waves.forEach((wave, index) => {
+                const baseHeight = 20 + Math.random() * 40;
+                const animationDelay = index * 0.3;
+                wave.style.animationDelay = `${animationDelay}s`;
+                wave.style.setProperty('--base-height', `${baseHeight}px`);
+            });
+        }
+
+        // Initialize sound wave animations
+        animateSoundWaves();
+        setInterval(animateSoundWaves, 10000); // Restart animation every 10 seconds
+
+        // Add easter egg for logo click
+        let logoClickCount = 0;
+        document.querySelector('.logo-font').addEventListener('click', () => {
+            logoClickCount++;
+            if (logoClickCount === 5) {
+                alert('🎵 音律的秘密即将揭晓... 敬请期待更多神奇功能！');
+                logoClickCount = 0;
+            }
+        });
+    </script>
+</body>
+</html>
+                    
+                    
